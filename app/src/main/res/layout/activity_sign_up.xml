@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".SignUpActivity">
 
+    
     <EditText
         android:id="@+id/et_githubId"
         android:layout_width="0dp"

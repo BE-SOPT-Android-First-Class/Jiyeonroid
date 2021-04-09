@@ -63,6 +63,7 @@ class SignUpActivity : AppCompatActivity() {
                 bundle.putString("usergithubId", usergithubId.toString())
                 intent.putExtras(bundle)
                 startActivity(intent)
+
             }
         }
     }
