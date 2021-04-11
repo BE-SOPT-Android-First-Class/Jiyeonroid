@@ -28,7 +28,7 @@ val bundle = Bundle();
                 Toast.makeText(this@SignUpActivity, "빈칸이 있는지 확인해주세요", Toast.LENGTH_SHORT).show()
   }
 ```
-  * 종료할 때 바로 종료되는지 확인 – 현재 signinActivity 로 이동함 - 수정 예정
+  * 종료할 때 바로 종료되는지 확인 – 현재 signinActivity 로 이동해서 수정 예정
   * +) 추가
     * view binding -> data binding 하면 어떤 점이 더 좋을지 생각해보기
     * startActivity register 사용, result
