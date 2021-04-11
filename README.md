@@ -12,7 +12,7 @@ val bundle = Bundle();
                 startActivity(intent)
 ```
 * `intent.putExtra()` 로 데이터를 넣어주는 대신 `bundle`로 묶어서 한 번에 `intent.putExtras()` 해주는 게 더 효율적
-* registerForActivityResult : startActivityForResult(), onActivityResult() deprecated
+* registerForActivityResult : startActivityForResult(), onActivityResult() deprecated - startActivity 사용하지 말기
 
 
 ## 2. 생명주기를 호출하고 다른 액티비티를 호출했을 경우의 로직
