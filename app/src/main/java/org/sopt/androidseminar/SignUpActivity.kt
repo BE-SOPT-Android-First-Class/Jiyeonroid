@@ -23,16 +23,26 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun signUpButtonClickEvent() {
         binding.btnSignUp.setOnClickListener {
+            val userName = binding.etName.text
+            val userGithubId = binding.etGithubId.text
+            val userPwd = binding.etSignupPwd.text
+
             if (isEmptyBlank()) {
                 Toast.makeText(this, "빈 칸이 있는지 확인해주세요", Toast.LENGTH_SHORT).show()
             } else {
                 val intent = Intent(this, SignUpActivity::class.java)
+//
+//                intent.putExtra("githubId", binding.etGithubId.text.toString())
+//                intent.putExtra("pwd", binding.etSignupPwd.text.toString())
+//                intent.putExtra("name", binding.etName.text.toString())
+//                setResult(Activity.RESULT_OK, intent)
 
-                intent.putExtra("githubId", binding.etGithubId.text.toString())
-                intent.putExtra("pwd", binding.etSignupPwd.text.toString())
-                intent.putExtra("name", binding.etName.text.toString())
+                val bundle = Bundle();
+                bundle.putString("userName", userName.toString())
+                bundle.putString("userPwd", userPwd.toString())
+                bundle.putString("userGithubId", userGithubId.toString())
+                intent.putExtras(bundle)
                 setResult(Activity.RESULT_OK, intent)
-
                 finish()
             }
         }
