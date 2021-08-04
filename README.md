@@ -4,15 +4,16 @@
 
 ## 1. 화면 전환 후 데이터를 가져온 로직 정리
 ```kotlin
-val bundle = Bundle();
-                bundle.putString("userName", userName.toString())
-                bundle.putString("userPwd", userPwd.toString())
-                bundle.putString("usergithubId", usergithubId.toString())
-                intent.putExtras(bundle)
-                startActivity(intent)
+  val bundle = Bundle();
+  bundle.putString("userName", userName.toString())
+  bundle.putString("userPwd", userPwd.toString())
+  bundle.putString("userGithubId", userGithubId.toString())
+  intent.putExtras(bundle)
+  setResult(Activity.RESULT_OK, intent)
+  finish()
 ```
 * `intent.putExtra()` 로 데이터를 넣어주는 대신 `bundle`로 묶어서 한 번에 `intent.putExtras()` 해주는 게 더 효율적
-* registerForActivityResult : startActivityForResult(), onActivityResult() deprecated - startActivity 사용하지 말기
+* registerForActivityResult : `startActivityForResult()`, `onActivityResult()` deprecated! `startActivity()`사용하지 말기
 
 
 ## 2. 생명주기를 호출하고 다른 액티비티를 호출했을 경우의 로직
@@ -21,7 +22,7 @@ val bundle = Bundle();
 
 ## 3. 배운 내용 + 추가할 내용 by 코드 리뷰
 * with view binding -> data binding
-* 모듈화, `setOnClickListener`	함수로 만들어보기
+* 모듈화, `setOnClickListener()`	함수로 만들어보기
 * 검증하는 로직 함수로 만들기
 ```kotlin
  if (userName.isNullOrBlank() || usergithubId.isNullOrBlank() || userPwd.isNullOrBlank()) {
