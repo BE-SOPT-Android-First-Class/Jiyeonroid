@@ -1,17 +1,18 @@
-package org.sopt.androidseminar
+package org.sopt.androidseminar.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import org.sopt.androidseminar.data.FollowingUserInfo
 import org.sopt.androidseminar.databinding.ItemFollowUserBinding
 
-class FollowingListAdapter: RecyclerView.Adapter<FollowingListAdapter.FollowingListViewHolder>() {
+class FollowingListAdapter : RecyclerView.Adapter<FollowingListAdapter.FollowingListViewHolder>() {
 
     val userList = mutableListOf<FollowingUserInfo>()
 
     class FollowingListViewHolder(
         private val binding: ItemFollowUserBinding
-    ): RecyclerView.ViewHolder(binding.root) {
+    ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(followingUserInfo: FollowingUserInfo) {
             binding.followUserName.text = followingUserInfo.userName
         }

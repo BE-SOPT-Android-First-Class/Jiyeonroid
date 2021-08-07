@@ -1,10 +1,11 @@
-package org.sopt.androidseminar
+package org.sopt.androidseminar.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import org.sopt.androidseminar.data.FollowingUserInfo
 import org.sopt.androidseminar.databinding.FragmentFollowingListBinding
 
 class FollowingListFragment : Fragment() {
@@ -43,6 +44,7 @@ class FollowingListFragment : Fragment() {
         )
         followingListAdapter.notifyDataSetChanged()
     }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

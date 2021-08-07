@@ -1,7 +1,8 @@
-package org.sopt.androidseminar
+package org.sopt.androidseminar.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import org.sopt.androidseminar.R
 import org.sopt.androidseminar.databinding.ActivityUserInfoBinding
 
 class UserInfoActivity : AppCompatActivity() {
