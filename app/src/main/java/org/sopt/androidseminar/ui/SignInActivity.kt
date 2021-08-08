@@ -1,4 +1,4 @@
-package org.sopt.androidseminar
+package org.sopt.androidseminar.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -22,7 +22,7 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun loginButtonClickEvent() {
-        binding.btnLogin.setOnClickListener {
+        binding.btnSignInLogin.setOnClickListener {
             if (isEmptyBlank()) {
                 Toast.makeText(this, "아이디/비밀번호를 확인해주세요!", Toast.LENGTH_SHORT).show()
             } else {
@@ -41,7 +41,7 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun isEmptyBlank(): Boolean {
-        return binding.etId.text.isNullOrBlank() || binding.etPwd.text.isNullOrBlank()
+        return binding.etSignInId.text.isNullOrBlank() || binding.etSignInPwd.text.isNullOrBlank()
     }
 
     override fun onStart() {

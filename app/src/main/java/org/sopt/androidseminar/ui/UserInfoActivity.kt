@@ -1,7 +1,8 @@
-package org.sopt.androidseminar
+package org.sopt.androidseminar.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import org.sopt.androidseminar.R
 import org.sopt.androidseminar.databinding.ActivityUserInfoBinding
 
 class UserInfoActivity : AppCompatActivity() {
@@ -16,7 +17,7 @@ class UserInfoActivity : AppCompatActivity() {
         val followingListFragment = FollowingListFragment()
 
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.add(R.id.user_info_fragment, followingListFragment)
+        transaction.add(R.id.fragment_user_info, followingListFragment)
         transaction.commit()
     }
 }
