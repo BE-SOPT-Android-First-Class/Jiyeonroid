@@ -1,4 +1,4 @@
-package org.sopt.androidseminar
+package org.sopt.androidseminar.ui
 
 import android.os.Bundle
 import android.util.Log

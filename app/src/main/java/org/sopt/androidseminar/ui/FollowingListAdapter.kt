@@ -1,19 +1,27 @@
-package org.sopt.androidseminar
+package org.sopt.androidseminar.ui
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import org.sopt.androidseminar.data.FollowingUserInfo
 import org.sopt.androidseminar.databinding.ItemFollowUserBinding
 
-class FollowingListAdapter: RecyclerView.Adapter<FollowingListAdapter.FollowingListViewHolder>() {
+class FollowingListAdapter : RecyclerView.Adapter<FollowingListAdapter.FollowingListViewHolder>() {
 
-    val userList = mutableListOf<FollowingUserInfo>()
+    private val userList = mutableListOf<FollowingUserInfo>()
+
+    fun setUserList(newList: List<FollowingUserInfo>) {
+        userList.addAll(newList)
+    }
 
     class FollowingListViewHolder(
         private val binding: ItemFollowUserBinding
-    ): RecyclerView.ViewHolder(binding.root) {
-        fun onBind(followingUserInfo: FollowingUserInfo) {
+    ) : RecyclerView.ViewHolder(binding.root) {
+        fun onBind(followingUserInfo: FollowingUserInfo, context: Context) {
             binding.followUserName.text = followingUserInfo.userName
+            Glide.with(context).load(followingUserInfo.userImgSrc).into(binding.followUserImage)
         }
     }
 
@@ -27,6 +35,6 @@ class FollowingListAdapter: RecyclerView.Adapter<FollowingListAdapter.FollowingL
     override fun getItemCount(): Int = userList.size
 
     override fun onBindViewHolder(holder: FollowingListViewHolder, position: Int) {
-        holder.onBind(userList[position])
+        holder.onBind(userList[position], holder.itemView.context)
     }
 }

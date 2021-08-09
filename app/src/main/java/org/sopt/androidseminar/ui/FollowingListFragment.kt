@@ -1,10 +1,11 @@
-package org.sopt.androidseminar
+package org.sopt.androidseminar.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import org.sopt.androidseminar.data.FollowingUserInfo
 import org.sopt.androidseminar.databinding.FragmentFollowingListBinding
 
 class FollowingListFragment : Fragment() {
@@ -14,35 +15,37 @@ class FollowingListFragment : Fragment() {
 
     private lateinit var binding: FragmentFollowingListBinding
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    private fun setRecyclerView() {
 
         val followingListAdapter = FollowingListAdapter()
 
         binding.userList.adapter = followingListAdapter
 
-        followingListAdapter.userList.addAll(
-            listOf<FollowingUserInfo>(
+        followingListAdapter.setUserList(
+            listOf(
                 FollowingUserInfo(
-                    userImage = "jiyeon",
                     userName = "jiyeon"
                 ),
                 FollowingUserInfo(
-                    userImage = "jiyeon1",
                     userName = "jiyeon1"
                 ),
                 FollowingUserInfo(
-                    userImage = "jiyeon2",
                     userName = "jiyeon2"
                 ),
                 FollowingUserInfo(
-                    userImage = "jiyeon3",
                     userName = "jiyeon3"
                 )
             )
         )
         followingListAdapter.notifyDataSetChanged()
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setRecyclerView()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
