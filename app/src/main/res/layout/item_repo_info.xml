@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="8dp"
+    android:paddingHorizontal="16dp">
+
+    <TextView
+        android:id="@+id/tv_repoName"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="@{repoName}"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="레포지토리 이름" />
+
+    <TextView
+        android:id="@+id/tv_repoDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="@{repoDesc}"
+        app:layout_constraintStart_toStartOf="@+id/tv_repoName"
+        app:layout_constraintTop_toBottomOf="@+id/tv_repoName"
+        tools:text="레포지토리 설명" />
+
+    <TextView
+        android:id="@+id/tv_repoLang"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="@{repoLang}"
+        app:layout_constraintStart_toStartOf="@+id/tv_repoDesc"
+        app:layout_constraintTop_toBottomOf="@+id/tv_repoDesc"
+        tools:text="레포지토리 언어" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

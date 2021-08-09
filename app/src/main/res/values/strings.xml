@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">hw1</string>
+    <string name="app_name">AndroidSeminar</string>
+
+    <string name="githubId">todayiswindy</string>
+    <string name="name">Jiyeon Kim</string>
+    <string name="repoName">Jiyeonroid</string>
 </resources>
