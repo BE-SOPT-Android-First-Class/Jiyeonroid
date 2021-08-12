@@ -18,47 +18,49 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         moreButtonClickEvent()
-        initRecyclerView()
+        setRepoList()
     }
 
     private fun moreButtonClickEvent() {
         binding.btnHomeMore.setOnClickListener {
-            val intent = Intent(this, FollowingListFragment::class.java)
+            val intent = Intent(this, UserInfoActivity::class.java)
+//            ActivityResultContracts.StartActivityForResult()
             startActivity(intent)
         }
     }
 
-    private fun initRecyclerView() {
-        val repositoryListAdapter = RepoListAdapter()
-        binding.rvHomeRepoList.adapter = repositoryListAdapter
-//        repoListAdapter.setRepositoryList(
-//            listOf(
-//                RepoListInfo("레포이름", "레포설명", "레포언어"),
-//                RepoListInfo("레포이름", "레포설명", "레포언어"),
-//                RepoListInfo("레포이름", "레포설명", "레포언어"),
-//                RepoListInfo("레포이름", "레포설명", "레포언어"),
-//                RepoListInfo(
-//                    "레포이름름름름름름름",
-//                    "레포설명명명명명명명명명명명명명명명명명명명명명명명명명명명명명명명명명명명명명",
-//                    "레포언어언어언어언어"
-//                )
-//            )
-//        )
-        repositoryListAdapter.setRepositoryList(
-            listOf(RepoListInfo(
-                repoName = "이ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ름",
-                repoDesc = "설ㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹ명",
-                repoLang = "언ㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ어"))
+    private fun setRepoList() {
+        val repoListAdapter = RepoListAdapter()
+        binding.rvHomeRepoList.adapter = repoListAdapter
+        repoListAdapter.setRepositoryList(
+            listOf(
+                RepoListInfo("레포이름", "레포설명", "레포언어"),
+                RepoListInfo("레포이름", "레포설명", "레포언어"),
+                RepoListInfo("레포이름", "레포설명", "레포언어"),
+                RepoListInfo("레포이름", "레포설명", "레포언어"),
+                RepoListInfo(
+                    "이ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ름",
+                    "설ㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹ명",
+                    "언ㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ어"
+                )
+            )
         )
-        for (i in 1 .. 10) {
-            repositoryListAdapter.setRepositoryList(
-                listOf(RepoListInfo(
-                    "Repository Name".plus(i),
-                    "Repository Description".plus(i),
-                    "Repository Language".plus(i))))
+
+        for (i in 1..10) {
+            repoListAdapter.setRepositoryList(
+                listOf(
+                    RepoListInfo(
+                        "Repository Name".plus(i),
+                        "Repository Description".plus(i),
+                        "Repository Language".plus(i)
+                    )
+                )
+            )
         }
-        repositoryListAdapter.notifyDataSetChanged()
+
+        repoListAdapter.notifyDataSetChanged()
     }
+
     override fun onStart() {
         super.onStart()
         Log.d(tag, "onStart")

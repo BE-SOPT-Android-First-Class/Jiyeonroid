@@ -1,11 +1,12 @@
 package org.sopt.androidseminar.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import org.sopt.androidseminar.data.FollowingUserInfo
+import org.sopt.androidseminar.data.FollowingListInfo
 import org.sopt.androidseminar.databinding.FragmentFollowingListBinding
 
 class FollowingListFragment : Fragment() {
@@ -15,33 +16,38 @@ class FollowingListFragment : Fragment() {
 
     lateinit var binding: FragmentFollowingListBinding
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    private fun setFollowingList() {
         val followingListAdapter = FollowingListAdapter()
         binding.rvFollowingList.adapter = followingListAdapter
 
         followingListAdapter.setUserList(
             listOf(
-                FollowingUserInfo(
-                    userImage = "jiyeon",
-                    userName = "jiyeon"
+                FollowingListInfo(
+                    userName = "todayiswindy"
                 ),
-                FollowingUserInfo(
-                    userImage = "seojin",
-                    userName = "seojin"
+                FollowingListInfo(
+                    userName = "SeojinSeojin"
                 ),
-                FollowingUserInfo(
-                    userImage = "hyunwoo",
-                    userName = "hyunwoo"
+                FollowingListInfo(
+                    userName = "12hyunwoo"
                 ),
-                FollowingUserInfo(
-                    userImage = "wonjoong",
-                    userName = "wonjoong"
+                FollowingListInfo(
+                    userName = "WonJoongLee"
                 )
             )
         )
         followingListAdapter.notifyDataSetChanged()
+    }
+
+    fun activityLogger(activityName: String, methodName: String) {
+        Log.d("log", "$activityName : $methodName called")
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        activityLogger(this.javaClass.name, "onViewCreated")
+        setFollowingList()
     }
 
     override fun onCreateView(
