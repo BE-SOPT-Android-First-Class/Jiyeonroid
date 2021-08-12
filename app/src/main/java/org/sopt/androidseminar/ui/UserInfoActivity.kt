@@ -17,7 +17,7 @@ class UserInfoActivity : AppCompatActivity() {
         val followingListFragment = FollowingListFragment()
 
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.add(R.id.user_info_fragment, followingListFragment)
+        transaction.add(R.id.fragment_user_info, followingListFragment)
         transaction.commit()
     }
 }

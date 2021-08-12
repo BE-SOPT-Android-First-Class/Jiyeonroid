@@ -23,9 +23,9 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun signUpButtonClickEvent() {
         binding.btnSignUp.setOnClickListener {
-            val userName = binding.etName.text
-            val userGithubId = binding.etGithubId.text
-            val userPwd = binding.etSignupPwd.text
+            val userName = binding.etSignUpName.text
+            val userGithubId = binding.etSignUpGithubId.text
+            val userPwd = binding.etSignUpPwd.text
 
             if (isEmptyBlank()) {
                 Toast.makeText(this, "빈 칸이 있는지 확인해주세요", Toast.LENGTH_SHORT).show()
@@ -49,7 +49,7 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun isEmptyBlank(): Boolean {
-        return binding.etGithubId.text.isNullOrBlank() || binding.etSignupPwd.text.isNullOrBlank() || binding.etName.text.isNullOrBlank()
+        return binding.etSignUpGithubId.text.isNullOrBlank() || binding.etSignUpPwd.text.isNullOrBlank() || binding.etSignUpName.text.isNullOrBlank()
     }
 
     override fun onStart() {

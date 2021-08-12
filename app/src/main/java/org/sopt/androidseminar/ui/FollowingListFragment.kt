@@ -1,11 +1,12 @@
 package org.sopt.androidseminar.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import org.sopt.androidseminar.data.FollowingUserInfo
+import org.sopt.androidseminar.data.FollowingListInfo
 import org.sopt.androidseminar.databinding.FragmentFollowingListBinding
 
 class FollowingListFragment : Fragment() {
@@ -13,37 +14,40 @@ class FollowingListFragment : Fragment() {
 //    private var _binding: FragmentFollowingListBinding?= null
 //    private val binding get() = _binding ?: error("View 를 참조하기 위해 binding 이 초기화되지 않았습니다")
 
-    private lateinit var binding: FragmentFollowingListBinding
+    lateinit var binding: FragmentFollowingListBinding
 
-    private fun setRecyclerView() {
-
+    private fun setFollowingList() {
         val followingListAdapter = FollowingListAdapter()
-
-        binding.userList.adapter = followingListAdapter
+        binding.rvFollowingList.adapter = followingListAdapter
 
         followingListAdapter.setUserList(
             listOf(
-                FollowingUserInfo(
-                    userName = "jiyeon"
+                FollowingListInfo(
+                    userName = "todayiswindy"
                 ),
-                FollowingUserInfo(
-                    userName = "jiyeon1"
+                FollowingListInfo(
+                    userName = "SeojinSeojin"
                 ),
-                FollowingUserInfo(
-                    userName = "jiyeon2"
+                FollowingListInfo(
+                    userName = "12hyunwoo"
                 ),
-                FollowingUserInfo(
-                    userName = "jiyeon3"
+                FollowingListInfo(
+                    userName = "WonJoongLee"
                 )
             )
         )
         followingListAdapter.notifyDataSetChanged()
     }
 
+    fun activityLogger(activityName: String, methodName: String) {
+        Log.d("log", "$activityName : $methodName called")
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setRecyclerView()
+        activityLogger(this.javaClass.name, "onViewCreated")
+        setFollowingList()
     }
 
     override fun onCreateView(
