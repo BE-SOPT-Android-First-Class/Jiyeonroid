@@ -13,6 +13,7 @@
         android:theme="@style/Theme.Hw1">
         <activity android:name=".ui.SignUpActivity" />
         <activity android:name=".ui.MainActivity" />
+        <activity android:name=".ui.UserInfoActivity">
         <activity android:name=".ui.UserInfoActivity" />
         <activity android:name=".ui.SignInActivity">
             <intent-filter>
