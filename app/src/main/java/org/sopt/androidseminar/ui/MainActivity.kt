@@ -50,9 +50,9 @@ class MainActivity : AppCompatActivity() {
             repoListAdapter.setRepositoryList(
                 listOf(
                     RepoListInfo(
-                        "Repository Name".plus(i),
-                        "Repository Description".plus(i),
-                        "Repository Language".plus(i)
+                        "레포이름".plus(i),
+                        "레포설명".plus(i),
+                        "레포언어".plus(i)
                     )
                 )
             )
