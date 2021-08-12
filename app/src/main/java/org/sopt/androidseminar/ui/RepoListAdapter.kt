@@ -14,9 +14,11 @@ class RepoListAdapter : RecyclerView.Adapter<RepoListAdapter.RepoListViewHolder>
         private val binding: ItemRepoInfoBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(repoListInfo: RepoListInfo) {
-            binding.tvRepoName.text = repoListInfo.repoName
-            binding.tvRepoDesc.text = repoListInfo.repoDesc
-            binding.tvRepoLang.text = repoListInfo.repoLang
+            binding.apply {
+                tvRepoName.text = repoListInfo.repoName
+                tvRepoDesc.text = repoListInfo.repoDesc
+                tvRepoLang.text = repoListInfo.repoLang
+            }
         }
     }
 
