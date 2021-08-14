@@ -36,6 +36,7 @@ class SignUpActivity : AppCompatActivity() {
 //                intent.putExtra("pwd", binding.etSignupPwd.text.toString())
 //                intent.putExtra("name", binding.etName.text.toString())
 //                setResult(Activity.RESULT_OK, intent)
+//                finish()
 
                 val bundle = Bundle();
                 bundle.putString("userName", userName.toString())
