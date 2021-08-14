@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import org.sopt.androidseminar.databinding.ActivitySignInBinding
 
@@ -11,6 +12,18 @@ class SignInActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignInBinding
     private val tag = "SignInActivity"
+
+    private val loginActivityLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) {
+        Log.d("로그", "Came from userInfo Activity")
+    }
+
+    private val signUpActivityLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) {
+        Log.d("로그", "Came from userInfo Activity")
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,15 +41,15 @@ class SignInActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "로그인 성공!", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
+                loginActivityLauncher.launch(intent)
             }
         }
     }
 
     private fun signUpButtonClickEvent() {
-        binding.btnSignIn.setOnClickListener {
+        binding.btnSignInSignUp.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
-            startActivity(intent)
+            signUpActivityLauncher.launch(intent)
         }
     }
 
