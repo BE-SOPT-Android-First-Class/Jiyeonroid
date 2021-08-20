@@ -22,7 +22,7 @@ class RepoListAdapter : RecyclerView.Adapter<RepoListAdapter.RepoListViewHolder>
         }
     }
 
-    fun setRepositoryList(newList:List<RepoListInfo>) {
+    fun setRepositoryList(newList: List<RepoListInfo>) {
         repoList.addAll(newList)
     }
 
