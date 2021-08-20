@@ -4,17 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingVertical="8dp"
-    android:paddingHorizontal="16dp">
+    android:paddingHorizontal="32dp"
+    android:paddingVertical="24dp">
 
     <TextView
         android:id="@+id/tv_repoName"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:ellipsize="end"
+        android:fontFamily="@font/nanum_square_extrabold"
         android:maxLines="1"
         android:text="@{repoName}"
-        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -24,7 +26,11 @@
         android:id="@+id/tv_repoDesc"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/nanum_square_regular"
         android:text="@{repoDesc}"
+        android:textColor="@color/black"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@+id/tv_repoName"
         app:layout_constraintTop_toBottomOf="@+id/tv_repoName"
         tools:text="레포지토리 설명" />
@@ -33,7 +39,11 @@
         android:id="@+id/tv_repoLang"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/nanum_square_regular"
         android:text="@{repoLang}"
+        android:textColor="@color/black"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@+id/tv_repoDesc"
         app:layout_constraintTop_toBottomOf="@+id/tv_repoDesc"
         tools:text="레포지토리 언어" />

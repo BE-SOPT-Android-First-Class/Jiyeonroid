@@ -4,4 +4,9 @@
     <string name="githubId">todayiswindy</string>
     <string name="name">Jiyeon Kim</string>
     <string name="repoName">Jiyeonroid</string>
+
+    <string name="signIn_githubId">깃허브 아이디</string>
+    <string name="signIn_githubId_string">깃허브 아이디를 입력헤주세요.</string>
+    <string name="signIn_pwd">비밀번호</string>
+    <string name="signIn_pwd_string">비밀번호를 입력해주세요.</string>
 </resources>

@@ -21,7 +21,7 @@ class FollowingListAdapter : RecyclerView.Adapter<FollowingListAdapter.Following
         }
     }
 
-    fun setUserList(newList : List<FollowingListInfo>) {
+    fun setUserList(newList: List<FollowingListInfo>) {
         userList.addAll(newList)
     }
 
