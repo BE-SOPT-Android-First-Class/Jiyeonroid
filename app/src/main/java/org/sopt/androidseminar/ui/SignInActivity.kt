@@ -6,7 +6,13 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import org.sopt.androidseminar.api.ServiceCreator
+import org.sopt.androidseminar.data.request.RequestLoginData
+import org.sopt.androidseminar.data.response.ResponseLoginData
 import org.sopt.androidseminar.databinding.ActivitySignInBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class SignInActivity : AppCompatActivity() {
 
@@ -34,14 +40,53 @@ class SignInActivity : AppCompatActivity() {
         signUpButtonClickEvent()
     }
 
+    private fun requestLogin() {
+        val requestLoginData = RequestLoginData(
+            email = binding.etSignInId.text.toString(),
+            password = binding.etSignInPwd.text.toString()
+        )
+
+        val call: Call<ResponseLoginData> = ServiceCreator.soptService
+            .postLogin(requestLoginData)
+
+        call.enqueue(object : Callback<ResponseLoginData> {
+            override fun onResponse(
+                call: Call<ResponseLoginData>,
+                response: Response<ResponseLoginData>
+            ) {
+                if (response.isSuccessful) {
+                    val data = response.body()?.data
+                    Toast.makeText(this@SignInActivity, data?.user_nickName, Toast.LENGTH_SHORT)
+                        .show()
+                    Log.d("success","success")
+                    startHomeActivity()
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseLoginData>, t: Throwable) {
+                Log.d("NetworkTest", "error:$t")
+            }
+        })
+    }
+
+    private fun startHomeActivity() {
+        Log.d("error", "error")
+        startActivity(
+            Intent(this, MainActivity::class.java).apply {
+                putExtra("id", "idddd")
+            }
+        )
+    }
+
     private fun loginButtonClickEvent() {
         binding.btnSignInLogin.setOnClickListener {
             if (isEmptyBlank()) {
                 Toast.makeText(this, "아이디/비밀번호를 확인해주세요!", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(this, "로그인 성공!", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, MainActivity::class.java)
-                loginActivityLauncher.launch(intent)
+//                val intent = Intent(this, MainActivity::class.java)
+//                loginActivityLauncher.launch(intent)
+                requestLogin()
             }
         }
     }
