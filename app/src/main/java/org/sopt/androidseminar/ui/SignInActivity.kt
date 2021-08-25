@@ -40,7 +40,8 @@ class SignInActivity : AppCompatActivity() {
         signUpButtonClickEvent()
     }
 
-    private fun requestLogin() {
+    private fun requestLogin()
+    {
         val requestLoginData = RequestLoginData(
             email = binding.etSignInId.text.toString(),
             password = binding.etSignInPwd.text.toString()
@@ -58,7 +59,7 @@ class SignInActivity : AppCompatActivity() {
                     val data = response.body()?.data
                     Toast.makeText(this@SignInActivity, data?.user_nickName, Toast.LENGTH_SHORT)
                         .show()
-                    Log.d("success","success")
+                    Log.d("success", "success")
                     startHomeActivity()
                 }
             }
