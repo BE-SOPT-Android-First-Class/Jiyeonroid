@@ -40,8 +40,7 @@ class SignInActivity : AppCompatActivity() {
         signUpButtonClickEvent()
     }
 
-    private fun requestLogin()
-    {
+    private fun requestLogin() {
         val requestLoginData = RequestLoginData(
             email = binding.etSignInId.text.toString(),
             password = binding.etSignInPwd.text.toString()
@@ -59,8 +58,11 @@ class SignInActivity : AppCompatActivity() {
                     val data = response.body()?.data
                     Toast.makeText(this@SignInActivity, data?.user_nickName, Toast.LENGTH_SHORT)
                         .show()
-                    Log.d("success", "success")
-                    startHomeActivity()
+
+                    val intent = Intent(this@SignInActivity, MainActivity::class.java)
+                    loginActivityLauncher.launch(intent)
+
+                    Log.d("log", "${response}, ${response.code()}")
                 }
             }
 
@@ -70,14 +72,13 @@ class SignInActivity : AppCompatActivity() {
         })
     }
 
-    private fun startHomeActivity() {
-        Log.d("error", "error")
-        startActivity(
-            Intent(this, MainActivity::class.java).apply {
-                putExtra("id", "idddd")
-            }
-        )
-    }
+//    private fun startHomeActivity() {
+//        startActivity(
+//            Intent(this, MainActivity::class.java).apply {
+//                putExtra("id", "idddd")
+//            }
+//        )
+//    }
 
     private fun loginButtonClickEvent() {
         binding.btnSignInLogin.setOnClickListener {
