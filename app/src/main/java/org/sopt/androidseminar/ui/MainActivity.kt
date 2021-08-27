@@ -1,13 +1,16 @@
 package org.sopt.androidseminar.ui
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import org.sopt.androidseminar.api.ServiceCreator
 import org.sopt.androidseminar.data.RepoListInfo
 import org.sopt.androidseminar.databinding.ActivityHomeBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         moreButtonClickEvent()
-        setRepoList()
+        requestRepoList()
     }
 
     private val followingListActivityLauncher = registerForActivityResult(
@@ -39,36 +42,57 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setRepoList() {
+    private fun setRepoList(repoList: List<RepoListInfo>) {
         val repoListAdapter = RepoListAdapter()
         binding.rvHomeRepoList.adapter = repoListAdapter
-        repoListAdapter.setRepositoryList(
-            listOf(
-                RepoListInfo("레포이름", "레포설명", "레포언어"),
-                RepoListInfo("레포이름", "레포설명", "레포언어"),
-                RepoListInfo("레포이름", "레포설명", "레포언어"),
-                RepoListInfo("레포이름", "레포설명", "레포언어"),
-                RepoListInfo(
-                    "이ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ름",
-                    "설ㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹ명",
-                    "언ㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ어"
-                )
-            )
-        )
 
-        for (i in 1..10) {
-            repoListAdapter.setRepositoryList(
-                listOf(
-                    RepoListInfo(
-                        "레포이름".plus(i),
-                        "레포설명".plus(i),
-                        "레포언어".plus(i)
-                    )
-                )
-            )
-        }
-
+//        repoListAdapter.setRepositoryList(
+//            listOf(
+//                RepoListInfo("레포이름", "레포설명", "레포언어"),
+//                RepoListInfo("레포이름", "레포설명", "레포언어"),
+//                RepoListInfo("레포이름", "레포설명", "레포언어"),
+//                RepoListInfo("레포이름", "레포설명", "레포언어"),
+//                RepoListInfo(
+//                    "이ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ름",
+//                    "설ㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹ명",
+//                    "언ㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ어"
+//                )
+//            )
+//        )
+//
+//        for (i in 1..10) {
+//            repoListAdapter.setRepositoryList(
+//                listOf(
+//                    RepoListInfo(
+//                        "레포이름".plus(i),
+//                        "레포설명".plus(i),
+//                        "레포언어".plus(i)
+//                    )
+//                )
+//            )
+//        }
+//
         repoListAdapter.notifyDataSetChanged()
+    }
+
+    private fun requestRepoList() {
+        val call: Call<List<RepoListInfo>> = ServiceCreator.githubService
+            .getRepositories("todayiswindy")
+
+        call.enqueue(object : Callback<List<RepoListInfo>> {
+            override fun onResponse(
+                call: Call<List<RepoListInfo>>,
+                response: Response<List<RepoListInfo>>
+            ) {
+                if (response.isSuccessful) {
+                    setRepoList(response.body()!!)
+                }
+            }
+
+            override fun onFailure(call: Call<List<RepoListInfo>>, t: Throwable) {
+                Log.d("log", "error:$t")
+            }
+        })
     }
 
     override fun onStart() {
