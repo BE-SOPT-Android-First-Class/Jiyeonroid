@@ -17,7 +17,7 @@ class FollowingListAdapter : RecyclerView.Adapter<FollowingListAdapter.Following
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(followingListInfo: FollowingListInfo, context: Context) {
             binding.tvFollowUserName.text = followingListInfo.userName
-            Glide.with(context).load(followingListInfo.userImgSrc).into(binding.ivFollowUserImage)
+            Glide.with(context).load(followingListInfo.userImgUrl).into(binding.ivFollowUserImage)
         }
     }
 

@@ -5,13 +5,29 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import org.sopt.androidseminar.api.ServiceCreator
+import org.sopt.androidseminar.data.request.RequestLoginData
+import org.sopt.androidseminar.data.request.RequestSignUpData
+import org.sopt.androidseminar.data.response.ResponseLoginData
+import org.sopt.androidseminar.data.response.ResponseSignUpData
 import org.sopt.androidseminar.databinding.ActivitySignUpBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class SignUpActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignUpBinding
     private val tag = "SignUpActivity"
+
+    private val signUpActivityLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) {
+        Log.d("로그", "Came from userInfo Activity")
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,16 +37,41 @@ class SignUpActivity : AppCompatActivity() {
         signUpButtonClickEvent()
     }
 
+    private fun signUpRequest() {
+        val requestSignUpData: RequestSignUpData = RequestSignUpData(
+            name = binding.etSignUpName.toString(),
+            email = binding.etSignUpGithubId.toString(),
+            password = binding.etSignUpPwd.toString()
+        )
+
+        val call: Call<ResponseSignUpData> = ServiceCreator.soptService
+            .postSignUp(requestSignUpData)
+
+        call.enqueue(object : Callback<ResponseSignUpData> {
+            override fun onResponse(
+                call: Call<ResponseSignUpData>,
+                response: Response<ResponseSignUpData>
+            ) {
+                if (response.isSuccessful) {
+                    val intent = Intent(this@SignUpActivity, MainActivity::class.java)
+                    signUpActivityLauncher.launch(intent)
+
+                    Log.d("로그", "${response}, ${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseSignUpData>, t: Throwable) {
+                Log.d("NetworkTest", "error:$t")
+            }
+        })
+    }
+
     private fun signUpButtonClickEvent() {
         binding.btnSignUp.setOnClickListener {
-            val userName = binding.etSignUpName.text
-            val userGithubId = binding.etSignUpGithubId.text
-            val userPwd = binding.etSignUpPwd.text
-
             if (isEmptyBlank()) {
                 Toast.makeText(this, "빈 칸이 있는지 확인해주세요", Toast.LENGTH_SHORT).show()
             } else {
-                val intent = Intent(this, SignUpActivity::class.java)
+//                val intent = Intent(this, SignUpActivity::class.java)
 //
 //                intent.putExtra("githubId", binding.etGithubId.text.toString())
 //                intent.putExtra("pwd", binding.etSignupPwd.text.toString())
@@ -38,13 +79,15 @@ class SignUpActivity : AppCompatActivity() {
 //                setResult(Activity.RESULT_OK, intent)
 //                finish()
 
-                val bundle = Bundle();
-                bundle.putString("userName", userName.toString())
-                bundle.putString("userPwd", userPwd.toString())
-                bundle.putString("userGithubId", userGithubId.toString())
-                intent.putExtras(bundle)
-                setResult(Activity.RESULT_OK, intent)
-                finish()
+//                val bundle = Bundle();
+//                bundle.putString("userName", userName.toString())
+//                bundle.putString("userPwd", userPwd.toString())
+//                bundle.putString("userGithubId", userGithubId.toString())
+//                intent.putExtras(bundle)
+//                setResult(Activity.RESULT_OK, intent)
+//                finish()
+
+                signUpRequest()
             }
         }
     }

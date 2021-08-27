@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setRepoList(repoList: List<RepoListInfo>) {
+    private fun setRepoList() {
         val repoListAdapter = RepoListAdapter()
         binding.rvHomeRepoList.adapter = repoListAdapter
 
@@ -85,7 +85,7 @@ class MainActivity : AppCompatActivity() {
                 response: Response<List<RepoListInfo>>
             ) {
                 if (response.isSuccessful) {
-                    setRepoList(response.body()!!)
+                    setRepoList()
                 }
             }
 
