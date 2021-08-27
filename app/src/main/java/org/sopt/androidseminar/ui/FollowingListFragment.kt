@@ -6,8 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import org.sopt.androidseminar.api.ServiceCreator
 import org.sopt.androidseminar.data.FollowingListInfo
 import org.sopt.androidseminar.databinding.FragmentFollowingListBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class FollowingListFragment : Fragment() {
 
@@ -20,23 +24,43 @@ class FollowingListFragment : Fragment() {
         val followingListAdapter = FollowingListAdapter()
         binding.rvFollowingList.adapter = followingListAdapter
 
-        followingListAdapter.setUserList(
-            listOf(
-                FollowingListInfo(
-                    userName = "todayiswindy"
-                ),
-                FollowingListInfo(
-                    userName = "SeojinSeojin"
-                ),
-                FollowingListInfo(
-                    userName = "12hyunwoo"
-                ),
-                FollowingListInfo(
-                    userName = "WonJoongLee"
-                )
-            )
-        )
-        followingListAdapter.notifyDataSetChanged()
+//        followingListAdapter.setUserList(
+//            listOf(
+//                FollowingListInfo(
+//                    userName = "todayiswindy"
+//                ),
+//                FollowingListInfo(
+//                    userName = "SeojinSeojin"
+//                ),
+//                FollowingListInfo(
+//                    userName = "12hyunwoo"
+//                ),
+//                FollowingListInfo(
+//                    userName = "WonJoongLee"
+//                )
+//            )
+//        )
+//        followingListAdapter.notifyDataSetChanged()
+    }
+
+    private fun requestFollower() {
+        val call: Call<List<FollowingListInfo>> =
+            ServiceCreator.githubService.getFollowerInfo("todayiswindy")
+
+        call.enqueue(object : Callback<List<FollowingListInfo>> {
+            override fun onResponse(
+                call: Call<List<FollowingListInfo>>,
+                response: Response<List<FollowingListInfo>>
+            ) {
+                if (response.isSuccessful) {
+                    setFollowingList()
+                }
+            }
+
+            override fun onFailure(call: Call<List<FollowingListInfo>>, t: Throwable) {
+                Log.d("로", "error:$t")
+            }
+        })
     }
 
     fun activityLogger(activityName: String, methodName: String) {
@@ -47,7 +71,7 @@ class FollowingListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         activityLogger(this.javaClass.name, "onViewCreated")
-        setFollowingList()
+        requestFollower()
     }
 
     override fun onCreateView(
