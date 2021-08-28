@@ -9,3 +9,6 @@
 ❎ | 2-2-3 안청년 탈출하기 | RecyclerViewItem 기능 구현하기
 ✅ | 2-3 안드 고수를 향해서 | 객체지향, notifyDataSetChanged
 ✅ | 3-선택 | Drawable, Font, Library 적용
+✅ | 4-1 안린이 탈출하기 | 로그인, 회원가입 통신 구현
+✅ | 4-2 안청년 탈출하기 | API 사용
+❎ | 4-3 안드 고수를 향해서 | Callback 익명 클래스 제작, Singleton 구현
